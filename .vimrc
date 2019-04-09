@@ -66,10 +66,20 @@ let g:solarized_termcolors=16
 let g:solarized_termtrans=1
 let g:solarized_contrast="normal"
 let g:solarized_visibility="normal"
-color solarized                 " Load a colorscheme
+
+let g:nord_italic = 1
+let g:nord_underline = 1
+let g:nord_uniform_status_lines = 1
+let g:nord_uniform_diff_background = 1
+let g:nord_cursor_line_number_background = 1
+let g:nord_comment_brightness = 20
+
+
+color nord                      " Load a colorscheme
 
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
+set termguicolors
 
 set cursorline                  " Highlight current line
 
@@ -173,3 +183,8 @@ if has('persistent_undo')
     set undolevels=1000         " Maximum number of changes that can be undone
     set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
 endif
+
+
+""""""""""""""""" ctrlp """"""""""""""""
+
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:100'

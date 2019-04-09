@@ -7,8 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="minimal"
-# ZSH_THEME="spaceship"
+ZSH_THEME="fwalch"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -80,16 +79,14 @@ export EDITOR='vim'
 #
 # Example aliases
 alias zshconfig="vim ~/.zshrc && source ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # make dir recursive and change dir
 mkdirc() {
     mkdir -p $1 && cd $1
 }
 
-# FZF + ag configuration
-
 export LC_ALL="en_US.UTF-8"
 export CDPATH="$HOME/src"
-
-alias ruen="translate -key $HOME/.config/translate-api-ba862c05399b.json -f ru -t en"
+export GOPATH="$HOME"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
