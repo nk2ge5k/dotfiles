@@ -7,6 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# ZSH_THEME="minimal"
 ZSH_THEME="fwalch"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -52,7 +53,7 @@ ZSH_THEME="fwalch"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(golang docker git kubectl)
+plugins=(osx golang docker git taskwarrior kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -87,6 +88,12 @@ mkdirc() {
 
 export LC_ALL="en_US.UTF-8"
 export CDPATH="$HOME/src"
+
 export GOPATH="$HOME"
-export PATH="$HOME/go/bin:$PATH"
+export GOROOT="$HOME/go"
+
+export PATH="$GOROOT/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH="/usr/local/sbin:$PATH"
+export PATH=$HOME/.cargo/bin:$PATH
