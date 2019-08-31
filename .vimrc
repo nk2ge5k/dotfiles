@@ -37,7 +37,6 @@ if has('clipboard')
 endif
 
 set virtualedit=onemore  " allow to move one character after end of line
-" set spell                " spellcheck on
 
 if has('cmdline_info')
     set ruler                   " Show the ruler
@@ -74,6 +73,7 @@ let g:nord_uniform_diff_background = 1
 let g:nord_cursor_line_number_background = 1
 
 color nord                      " Load a colorscheme
+" color default
 
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
@@ -83,9 +83,11 @@ set cursorline                  " Highlight current line
 
 highlight clear SignColumn      " SignColumn should match background
 highlight clear LineNr          " Current line number row will have same background color in relative mode
+" highlight ColorColumn guibg=LightGray
+" highlight Comment guifg=#ffffff
 
 set laststatus=2                " always display statusline
-set statusline=%<%n\ %f\ %m\ %r\ %y\ 0x%B,%b%=%l:%c\ %P
+set statusline=%<%n\ %F\ %m\ %r\ %y\ 0x%B,%b%=%l:%c\ %P
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
@@ -101,11 +103,11 @@ set wildmode=list:longest,full  " Command <Tab> completion, list matches, then l
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
-set foldenable                  " Auto fold code
 set colorcolumn=81              " higlight column 81
 set list!
 set listchars=tab:·\ ,trail:.   " Highlight problematic whitespace
 set fillchars+=vert:\ 
+" set spell spelllang=en_us,ru
 
 """""""""""""""""""""""""""""""""" FORMATTING """"""""""""""""""""""""""""""""""
 
@@ -148,17 +150,11 @@ let g:go_highlight_types = 0
 let g:go_highlight_operators = 0
 let g:go_highlight_build_constraints = 1
 let g:go_metalinter_autosave = 1
-let g:go_doc_command = ["godoc", "-ex"]
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+" let g:go_metalinter_command = "golangci-lint"
+let g:go_addtags_transform = "camelcase"
+let g:go_doc_command = ["godoc", "-all", "-ex"]
 let g:go_fmt_command = "goimports"
 
-""""""""""""""" syntatic """""""""""""""
-
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:syntastic_check_on_wq = 0
-let g:syntastic_go_checkers = ['go lint']
-let g:syntastic_javascript_checkers = ['jshint']
 
 """"""""""""""" rainbow """"""""""""""""
 
@@ -185,4 +181,42 @@ endif
 
 """"""""""""""""" ctrlp """"""""""""""""
 
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:100'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:50'
+let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ftv'}
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
+let g:ctrlp_root_markers = ['.git', '.svn', 'go.mod', 'project.yml']
+let g:ctrlp_custom_ignore = { 'dir': '\v[\/]\.(git|hg|svn)$' }
+
+"""""""""""""""" tagbar  """""""""""""""
+
+let g:tagbar_ctags_bin = '/usr/local/opt/ctags/bin/ctags'
+
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }

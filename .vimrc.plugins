@@ -2,7 +2,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
-    Plugin 'scrooloose/nerdtree'
+    " Plugin 'scrooloose/nerdtree'
     Plugin 'scrooloose/nerdcommenter'
     Plugin 'bling/vim-bufferline'
     Plugin 'terryma/vim-multiple-cursors'
@@ -23,7 +23,7 @@ call vundle#begin()
     Plugin 'luochen1990/rainbow'
     Plugin 'easymotion/vim-easymotion'
     Plugin 'godlygeek/tabular'
-    Bundle 'farseer90718/vim-taskwarrior'
+    Plugin 'keith/swift.vim'
 
     " color
     Plugin 'altercation/vim-colors-solarized'
@@ -34,4 +34,7 @@ call vundle#begin()
     Plugin 'tpope/vim-surround'
     Plugin 'mileszs/ack.vim'
     Plugin 'mbbill/undotree'
+    Plugin 'junegunn/goyo.vim'
+
+    " Plugin 'zxqfl/tabnine-vim'
 call vundle#end()
