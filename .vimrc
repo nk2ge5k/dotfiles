@@ -11,17 +11,6 @@ set nocompatible
 
 set background=dark " dark background
 
-function! ToggleBG()
-    let s:tbg = &background
-    " Inversion
-    if s:tbg == "dark"
-        set background=light
-    else
-        set background=dark
-    endif
-endfunction
-noremap <leader>bg :call ToggleBG()<CR>
-
 filetype plugin indent on   " autodetect file type
 syntax on                   " syntax highlighting
 scriptencoding utf-8
@@ -60,11 +49,6 @@ cmap cwd lcd %:p:h
 cmap cd. lcd %:p:h
 
 """""""""""""""""""""""""""""""""" APPERENCE """""""""""""""""""""""""""""""""""
-
-let g:solarized_termcolors=16
-let g:solarized_termtrans=1
-let g:solarized_contrast="normal"
-let g:solarized_visibility="normal"
 
 let g:nord_italic = 1
 let g:nord_underline = 1
@@ -132,6 +116,8 @@ nmap j gj
 nmap k gk
 
 nnoremap <S-y> :NERDTreeToggle<CR>
+noremap time :put =strftime('%H:%M:%S')<CR>
+noremap date :put =strftime('%Y-%m-%d')<CR>
 
 """"""""""""""" NERDTree """"""""""""""" 
 
