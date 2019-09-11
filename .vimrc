@@ -12,7 +12,7 @@ set nocompatible
 set background=dark " dark background
 
 filetype plugin indent on   " autodetect file type
-syntax on                   " syntax highlighting
+" syntax on                   " syntax highlighting
 scriptencoding utf-8
 set encoding=utf-8
 set termencoding=utf-8
@@ -56,8 +56,8 @@ let g:nord_uniform_status_lines = 1
 let g:nord_uniform_diff_background = 1
 let g:nord_cursor_line_number_background = 1
 
-color nord                      " Load a colorscheme
-" color default
+" color nord                      " Load a colorscheme
+color default
 
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
@@ -67,7 +67,9 @@ set cursorline                  " Highlight current line
 
 highlight clear SignColumn      " SignColumn should match background
 highlight clear LineNr          " Current line number row will have same background color in relative mode
-" highlight ColorColumn guibg=LightGray
+highlight CursorLine cterm=None guibg=#1d1d1d
+highlight ColorColumn guibg=#2d2d2d
+
 " highlight Comment guifg=#ffffff
 
 set laststatus=2                " always display statusline
@@ -75,7 +77,7 @@ set statusline=%<%n\ %F\ %m\ %r\ %y\ 0x%B,%b%=%l:%c\ %P
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
-set number                      " Line numbers on
+" set number                      " Line numbers on
 set showmatch                   " Show matching brackets/parenthesis
 set incsearch                   " Find as you type search
 set hlsearch                    " Highlight search terms
