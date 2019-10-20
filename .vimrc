@@ -58,19 +58,19 @@ let g:nord_cursor_line_number_background = 1
 
 " color nord                      " Load a colorscheme
 color default
+" color dvo
 
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
-set termguicolors
 
 set cursorline                  " Highlight current line
 
-highlight clear SignColumn      " SignColumn should match background
-highlight clear LineNr          " Current line number row will have same background color in relative mode
-highlight CursorLine cterm=None guibg=#1d1d1d
-highlight ColorColumn guibg=#2d2d2d
+" highlight clear SignColumn      " SignColumn should match background
+" highlight clear LineNr          " Current line number row will have same background color in relative mode
+" highlight CursorLine cterm=None guibg=#1d1d1d
+" highlight ColorColumn guibg=#2d2d2d
 
-" highlight Comment guifg=#ffffff
+highlight Comment guifg=#ffffff
 
 set laststatus=2                " always display statusline
 set statusline=%<%n\ %F\ %m\ %r\ %y\ 0x%B,%b%=%l:%c\ %P
@@ -105,7 +105,7 @@ set softtabstop=4               " Let backspace delete indent
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
 set splitright                  " Puts new vsplit windows to the right of the current
 set splitbelow                  " Puts new split windows to the bottom of the current
-set smartindent                 " TODO: disable?
+" set smartindent                 " TODO: disable?
 
 """"""""""""""""""""""""""""""""" KEY MAPPING """"""""""""""""""""""""""""""""""
 
@@ -118,12 +118,11 @@ nmap j gj
 nmap k gk
 
 nnoremap <S-y> :NERDTreeToggle<CR>
-noremap time :put =strftime('%H:%M:%S')<CR>
-noremap date :put =strftime('%Y-%m-%d')<CR>
 
 """"""""""""""" NERDTree """"""""""""""" 
 
-let NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeNodeDelimiter = "\u00a0"
 
 """""""""""" NERDCommenter """""""""""" 
 
@@ -208,3 +207,12 @@ let g:tagbar_type_go = {
 	\ 'ctagsbin'  : 'gotags',
 	\ 'ctagsargs' : '-sort -silent'
 \ }
+
+""""""""""""""""" ale """"""""""""""""""
+
+
+let g:ale_completion_enabled=1
+let g:ale_linters = {
+	\ 'go': ['gopls'],
+    \ 'python': ['flake', 'pytest'],
+	\}

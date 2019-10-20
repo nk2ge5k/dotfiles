@@ -2,12 +2,11 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
-    " Plugin 'scrooloose/nerdtree'
+    Plugin 'scrooloose/nerdtree'
     Plugin 'scrooloose/nerdcommenter'
     Plugin 'bling/vim-bufferline'
     Plugin 'terryma/vim-multiple-cursors'
     Plugin 'majutsushi/tagbar'
-    Plugin 'scrooloose/syntastic'
     Plugin 'chrisbra/csv.vim.git'
     Plugin 'fatih/vim-go'
     Plugin 'plasticboy/vim-markdown'
@@ -19,11 +18,11 @@ call vundle#begin()
     Plugin 'rust-lang/rust.vim'
     Plugin 'tpope/vim-fugitive.git'
     Plugin 'tpope/vim-rhubarb'
-    Plugin 'shumphrey/fugitive-gitlab.vim'
     Plugin 'luochen1990/rainbow'
     Plugin 'easymotion/vim-easymotion'
     Plugin 'godlygeek/tabular'
     Plugin 'keith/swift.vim'
+    Plugin 'dense-analysis/ale'
 
     " color
     Plugin 'altercation/vim-colors-solarized'
@@ -36,5 +35,4 @@ call vundle#begin()
     Plugin 'mbbill/undotree'
     Plugin 'junegunn/goyo.vim'
 
-    " Plugin 'zxqfl/tabnine-vim'
 call vundle#end()
