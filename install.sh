@@ -8,5 +8,5 @@ ln -sf $(pwd)/.zshrc $HOME/.zshrc
 
 cat >> $HOME/.gitconfig <<EOF
 [include]
-    $(pwd)/.gitconfig
+    path = $(pwd)/.gitconfig
 EOF
