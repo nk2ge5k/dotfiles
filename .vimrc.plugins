@@ -1,40 +1,28 @@
 set rtp+=~/.vim/bundle/Vundle.vim
 
-call vundle#begin()
-    Plugin 'VundleVim/Vundle.vim'
-    " Plugin 'scrooloose/nerdtree'
-    Plugin 'scrooloose/nerdcommenter'
-    Plugin 'bling/vim-bufferline'
-    Plugin 'terryma/vim-multiple-cursors'
-    Plugin 'majutsushi/tagbar'
-    Plugin 'scrooloose/syntastic'
-    Plugin 'chrisbra/csv.vim.git'
-    Plugin 'fatih/vim-go'
-    Plugin 'plasticboy/vim-markdown'
-    Plugin 'vimwiki/vimwiki'
-    Plugin 'elmcast/elm-vim'
-    Plugin 'neovimhaskell/haskell-vim.git'
-    Plugin 'leafgarland/typescript-vim'
-    Plugin 'derekwyatt/vim-scala'
-    Plugin 'rust-lang/rust.vim'
-    Plugin 'tpope/vim-fugitive.git'
-    Plugin 'tpope/vim-rhubarb'
-    Plugin 'shumphrey/fugitive-gitlab.vim'
-    Plugin 'luochen1990/rainbow'
-    Plugin 'easymotion/vim-easymotion'
-    Plugin 'godlygeek/tabular'
-    Plugin 'keith/swift.vim'
+call plug#begin()
+    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'bling/vim-bufferline'
+    Plug 'terryma/vim-multiple-cursors'
+    Plug 'majutsushi/tagbar'
+    Plug 'fatih/vim-go'
+    Plug 'plasticboy/vim-markdown'
+    Plug 'vimwiki/vimwiki'
+    Plug 'rust-lang/rust.vim'
+    Plug 'tpope/vim-fugitive'
+    Plug 'easymotion/vim-easymotion'
+    Plug 'godlygeek/tabular'
+    Plug 'airblade/vim-rooter'
+    Plug 'andymass/vim-matchup'
 
     " color
-    Plugin 'altercation/vim-colors-solarized'
-    Plugin 'arcticicestudio/nord-vim'
+    Plug 'chriskempson/base16-vim'
 
     " experiment
-    Plugin 'kien/ctrlp.vim'
-    Plugin 'tpope/vim-surround'
-    Plugin 'mileszs/ack.vim'
-    Plugin 'mbbill/undotree'
-    Plugin 'junegunn/goyo.vim'
-
-    " Plugin 'zxqfl/tabnine-vim'
-call vundle#end()
+    Plug 'kballard/vim-swift'
+    Plug 'mbbill/undotree'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+call plug#end()

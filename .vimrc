@@ -8,14 +8,19 @@ endif
 
 let mapleader=","
 set nocompatible
+set shell=/bin/bash
 
 set background=dark " dark background
 
 filetype plugin indent on   " autodetect file type
-" syntax on                   " syntax highlighting
+syntax on                   " syntax highlighting
 scriptencoding utf-8
 set encoding=utf-8
 set termencoding=utf-8
+set t_ut=
+set ttyscroll=10
+set ttyfast
+" set termguicolors
 
 if has('clipboard')
     if has('unnamedplus')  " When possible use + register for copy-paste
@@ -39,6 +44,8 @@ set noswapfile           " disable swap files
 set autochdir            " auto change current directory to file directory
 set hidden               " Allow buffer switching without saving
 set history=1000
+set number
+set relativenumber
 
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
@@ -48,36 +55,28 @@ cmap w!! w !sudo tee % >/dev/null
 cmap cwd lcd %:p:h
 cmap cd. lcd %:p:h
 
+noremap <leader>tn :setlocal invnumber<CR>
+noremap <leader>hl :nohl<CR>
+
+
 """""""""""""""""""""""""""""""""" APPERENCE """""""""""""""""""""""""""""""""""
 
-let g:nord_italic = 1
-let g:nord_underline = 1
-let g:nord_uniform_status_lines = 1
-let g:nord_uniform_diff_background = 1
-let g:nord_cursor_line_number_background = 1
-
-" color nord                      " Load a colorscheme
-color default
+let base16colorspace=256  " Access colors present in 256 colorspace
+color base16-railscasts
 
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
-set termguicolors
 
 set cursorline                  " Highlight current line
 
 highlight clear SignColumn      " SignColumn should match background
 highlight clear LineNr          " Current line number row will have same background color in relative mode
-highlight CursorLine cterm=None guibg=#1d1d1d
-highlight ColorColumn guibg=#2d2d2d
-
-" highlight Comment guifg=#ffffff
 
 set laststatus=2                " always display statusline
 set statusline=%<%n\ %F\ %m\ %r\ %y\ 0x%B,%b%=%l:%c\ %P
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
-" set number                      " Line numbers on
 set showmatch                   " Show matching brackets/parenthesis
 set incsearch                   " Find as you type search
 set hlsearch                    " Highlight search terms
@@ -94,6 +93,9 @@ set list!
 set listchars=tab:·\ ,trail:.   " Highlight problematic whitespace
 set fillchars+=vert:\ 
 " set spell spelllang=en_us,ru
+set vb t_vb=                    " No more beeps
+set lazyredraw
+set nofoldenable
 
 """""""""""""""""""""""""""""""""" FORMATTING """"""""""""""""""""""""""""""""""
 
@@ -118,35 +120,37 @@ nmap j gj
 nmap k gk
 
 nnoremap <S-y> :NERDTreeToggle<CR>
-noremap time :put =strftime('%H:%M:%S')<CR>
-noremap date :put =strftime('%Y-%m-%d')<CR>
 
-""""""""""""""" NERDTree """"""""""""""" 
+""""""""""""""" Fugitive """""""""""""""
 
-let NERDTreeAutoDeleteBuffer = 1
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap <leader>gs :Gstatus<CR>
 
-"""""""""""" NERDCommenter """""""""""" 
+
+""""""""""""""" NERDTree """""""""""""""
+
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeNodeDelimiter = "\u00a0"
+
+"""""""""""" NERDCommenter """"""""""""
 
 let g:NERDSpaceDelims = 1
 
 """""""""""""""" vim-go """"""""""""""""
 
 let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
+let g:go_highlight_methods = 0
+let g:go_highlight_fields = 0
 let g:go_highlight_types = 0
 let g:go_highlight_operators = 0
 let g:go_highlight_build_constraints = 1
-let g:go_metalinter_autosave = 1
-" let g:go_metalinter_command = "golangci-lint"
 let g:go_addtags_transform = "camelcase"
-let g:go_doc_command = ["godoc", "-all", "-ex"]
 let g:go_fmt_command = "goimports"
+let g:go_def_mapping_enabled = 1
 
+let g:go_term_enabled = 1
+let g:go_term_close_on_exit = 0
 
-""""""""""""""" rainbow """"""""""""""""
-
-let g:rainbow_active = 0
 
 """"""""""""""" ack.vim """"""""""""""""
 
@@ -157,25 +161,28 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-""""""""""""""" undotree """""""""""""""
-
-if has('persistent_undo')
-    set undodir=$HOME/.undodir/
-    set undofile                " So is persistent undo ...
-    set undolevels=1000         " Maximum number of changes that can be undone
-    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+if executable('rg')
+  set grepprg=rg\ --no-heading\ --vimgrep
+  set grepformat=%f:%l:%c:%m
 endif
 
+""""""""""""""" undotree """""""""""""""
 
-""""""""""""""""" ctrlp """"""""""""""""
+set undodir=$HOME/dotfiles/.vimdid/
+set undofile                " So is persistent undo ...
 
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:50'
-let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ftv'}
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
-let g:ctrlp_root_markers = ['.git', '.svn', 'go.mod', 'project.yml']
-let g:ctrlp_custom_ignore = { 'dir': '\v[\/]\.(git|hg|svn)$' }
+""""""""""""""""" fzf  """"""""""""""""""
+
+map <C-p> :Files<CR>
+nmap <leader>; :Buffers<CR>
+
+let g:fzf_layout = { 'down': '~20%' }
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 """""""""""""""" tagbar  """""""""""""""
 
@@ -208,3 +215,16 @@ let g:tagbar_type_go = {
 	\ 'ctagsbin'  : 'gotags',
 	\ 'ctagsargs' : '-sort -silent'
 \ }
+
+""""""""""""""""" ALE """"""""""""""""""
+
+let g:ale_enable=0
+let g:ale_linters = {
+	\ 'go': ['gopls'],
+    \ 'python': ['flake8', 'pylint'],
+	\}
+
+"""""""""""""" Rust """""""""""""""""""
+
+let g:rust_clip_command = 'pbcopy'
+let g:rustfmt_autosave = 1
