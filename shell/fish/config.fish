@@ -14,15 +14,15 @@ set -x LC_CTYPE "en_US.UTF-8"
 set -x GOPATH $HOME
 set -x GOROOT $HOME/go
 
-set -ax PATH $GOROOT/bin
-set -ax PATH $GOPATH/bin
-set -ax PATH $GOPATH/src/github.com/uber/go-torch/FlameGraph
-set -ax PATH /opt/local/bin
-set -ax PATH /opt/local/sbin
-set -ax PATH /usr/local/sbin
-set -ax PATH $HOME/.cargo/bin
-set -ax PATH /usr/local/opt/libpq/bin
-set -ax PATH /Users/nk2ge5k/yandex-cloud/bin
+set -px PATH $GOROOT/bin
+set -px PATH $GOPATH/bin
+set -px PATH $GOPATH/src/github.com/uber/go-torch/FlameGraph
+set -px PATH /opt/local/bin
+set -px PATH /opt/local/sbin
+set -px PATH /usr/local/sbin
+set -px PATH $HOME/.cargo/bin
+set -px PATH /usr/local/opt/libpq/bin
+set -px PATH /Users/nk2ge5k/yandex-cloud/bin
 
 function fish_prompt
 	set_color brblack
