@@ -7,8 +7,8 @@ GO_ARCH=amd64
 WORK_DIR=$(pwd)
 
 # VIM
-ln -sf $WORK_DIR/editor/.vimrc $HOME/.vimrc
-ln -sf $WORK_DIR/editor/.vimrc.plugins $HOME/.vimrc.plugins
+ln -sf $WORK_DIR/editor/vimrc $HOME/.vimrc
+ln -sf $WORK_DIR/editor/vimrc.plugins $HOME/.vimrc.plugins
 # PATHOGEN
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
     curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
@@ -19,7 +19,7 @@ ln -sf $WORK_DIR/shell/tmux.conf $HOME/.tmux.conf
 # GIT
 cat >> $HOME/.gitconfig <<EOF
 [include]
-    $WORK_DIR/shell/.gitconfig
+    path = $WORK_DIR/shell/.gitconfig
 EOF
 
 # FISH
@@ -58,18 +58,20 @@ install() {
 
 # Install GO
 if ! executable go; then
+    echo "Installing Go..."
     curl --silent https://storage.googleapis.com/golang/$GO_VERSION.$GO_OS-$GO_ARCH.tar.gz | tar xvz -C $HOME
 fi
 
 # Install Rust
-if ! executable rust; then
+if ! executable rustc; then
+    echo "Installing Rust..."
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 
 # Install brew for MacOS
 if [[ "$(uname)" == "Darwin" ]]; then
     if ! executable brew; then
-        echo "Installing brew..."
+        echo "Installing Homebrew..."
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 fi
@@ -80,4 +82,3 @@ install ssh
 install tmux
 install wget
 install mutt
-install w3c
