@@ -20,7 +20,6 @@ set termencoding=utf-8
 set t_ut=
 set ttyscroll=10
 set ttyfast
-" set termguicolors
 
 if has('clipboard')
     if has('unnamedplus')  " When possible use + register for copy-paste
@@ -59,8 +58,8 @@ noremap <leader>hl :nohl<CR>
 
 """""""""""""""""""""""""""""""""" APPERENCE """""""""""""""""""""""""""""""""""
 
-let base16colorspace=256  " Access colors present in 256 colorspace
 color base16-railscasts
+let base16colorspace=256  " Access colors present in 256 colorspace
 
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
