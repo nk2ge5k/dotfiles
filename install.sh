@@ -2,10 +2,7 @@
 
 GO_VERSION=go1.13.5
 GO_ARCH=amd64
-GO_OS=linux
-if [[ "$(uname)" == "Darwin" ]]; then
-    GO_OS=darwin
-fi
+[[ "$(uname)" == "Darwin" ]] &&  GO_OS=darwin || GO_OS=linux
 
 WORK_DIR=$(pwd)
 
@@ -26,8 +23,12 @@ cat >> $HOME/.gitconfig <<EOF
 EOF
 
 # FISH
-mkdir -p $HOME/.config &&
+mkdir -p $HOME/.config/fish &&
     ln -sf $WORK_DIR/shell/fish/config.fish $HOME/.config/fish/config.fish
+
+# ALACRITTY
+mkdir -p $HOME/.config/alacritty &&
+    ln -sf $WORK_DIR/shell/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
 executable() {
     local program="${1}"

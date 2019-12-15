@@ -166,7 +166,7 @@ endif
 
 """"""""""""""" undotree """""""""""""""
 
-set undodir=$HOME/dotfiles/.vimdid/
+set undodir=$HOME/dotfiles/editor/.vimdid/
 set undofile                " So is persistent undo ...
 
 """"""""""""""""" fzf  """"""""""""""""""
