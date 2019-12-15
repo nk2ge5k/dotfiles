@@ -32,12 +32,10 @@ endif
 
 set virtualedit=onemore  " allow to move one character after end of line
 
-if has('cmdline_info')
-    set ruler                   " Show the ruler
-    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
-    set showcmd                 " Show partial commands in status line and
-                                " Selected characters/lines in visual mode
-endif
+set ruler                   " Show the ruler
+set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
+set showcmd                 " Show partial commands in status line and
+                            " Selected characters/lines in visual mode
 
 set mouse=""             " disable mouse
 set noswapfile           " disable swap files
