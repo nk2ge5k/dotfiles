@@ -51,3 +51,5 @@ function fish_greeting
 
 	set_color normal
 end
+
+fish_vi_key_bindings
