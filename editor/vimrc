@@ -47,6 +47,7 @@ set hidden               " Allow buffer switching without saving
 set history=1000
 set number
 set relativenumber
+set virtualedit=block
 
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
