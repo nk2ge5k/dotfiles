@@ -21,6 +21,10 @@ set t_ut=
 set ttyscroll=10
 set ttyfast
 
+if has("termguicolors")
+    set termguicolors
+endif
+
 if has('clipboard')
     if has('unnamedplus')  " When possible use + register for copy-paste
         set clipboard=unnamed,unnamedplus
@@ -58,7 +62,7 @@ noremap <leader>hl :nohl<CR>
 
 """""""""""""""""""""""""""""""""" APPERENCE """""""""""""""""""""""""""""""""""
 
-color base16-railscasts
+color base16-gruvbox-dark-hard
 let base16colorspace=256  " Access colors present in 256 colorspace
 
 set tabpagemax=15               " Only show 15 tabs
