@@ -9,9 +9,10 @@ WORK_DIR=$(pwd)
 # VIM
 ln -sf $WORK_DIR/editor/vimrc $HOME/.vimrc
 ln -sf $WORK_DIR/editor/vimrc.plugins $HOME/.vimrc.plugins
-# PATHOGEN
-mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+# VIM-PLUG
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # TMUX 
 ln -sf $WORK_DIR/shell/tmux.conf $HOME/.tmux.conf
