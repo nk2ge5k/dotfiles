@@ -8,9 +8,8 @@ endif
 
 let mapleader=","
 set nocompatible
-set shell=/bin/bash
 
-set background=dark " dark background
+set background=dark         " dark background
 
 filetype plugin indent on   " autodetect file type
 syntax on                   " syntax highlighting
@@ -26,24 +25,21 @@ if has("termguicolors")
 endif
 
 if has('clipboard')
-    if has('unnamedplus')  " When possible use + register for copy-paste
+    if has('unnamedplus')   " When possible use + register for copy-paste
         set clipboard=unnamed,unnamedplus
-    else         " On mac and Windows, use * register for copy-paste
+    else                    " On mac and Windows, use * register for copy-paste
         set clipboard=unnamed
     endif
 endif
 
-set virtualedit=onemore  " allow to move one character after end of line
-
 set ruler                   " Show the ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
 set showcmd                 " Show partial commands in status line and
-                            " Selected characters/lines in visual mode
 
-set mouse=""             " disable mouse
-set noswapfile           " disable swap files
-set autochdir            " auto change current directory to file directory
-set hidden               " Allow buffer switching without saving
+set mouse=""                " disable mouse
+set noswapfile              " disable swap files
+set autochdir               " auto change current directory to file directory
+set hidden                  " Allow buffer switching without saving
 set history=1000
 set number
 set relativenumber
@@ -64,7 +60,7 @@ noremap <leader>hl :nohl<CR>
 """""""""""""""""""""""""""""""""" APPERENCE """""""""""""""""""""""""""""""""""
 
 color base16-gruvbox-dark-hard
-let base16colorspace=256  " Access colors present in 256 colorspace
+let base16colorspace=256        " Access colors present in 256 colorspace
 
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
@@ -72,7 +68,8 @@ set showmode                    " Display the current mode
 set cursorline                  " Highlight current line
 
 highlight clear SignColumn      " SignColumn should match background
-highlight clear LineNr          " Current line number row will have same background color in relative mode
+highlight clear LineNr          " Current line number row will have same
+                                " background color in relative mode
 
 set laststatus=2                " always display statusline
 set statusline=%<%n\ %F\ %m\ %r\ %y\ 0x%B,%b%=%l:%c\ %P
@@ -86,7 +83,8 @@ set winminheight=0              " Windows can be 0 line high
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set wildmenu                    " Show list instead of just completing
-set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+set wildmode=list:longest,full  " Command <Tab> completion, list matches, then
+                                " longest common part, then all.
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
@@ -122,22 +120,22 @@ nmap k gk
 
 nnoremap <S-y> :NERDTreeToggle<CR>
 
-""""""""""""""" Fugitive """""""""""""""
+"""""""""""""""""""""""""""""""""" Fugitive """"""""""""""""""""""""""""""""""""
 
 nnoremap <leader>gd :Gvdiff<CR>
 nnoremap <leader>gs :Gstatus<CR>
 
 
-""""""""""""""" NERDTree """""""""""""""
+"""""""""""""""""""""""""""""""""" NERDTree """"""""""""""""""""""""""""""""""""
 
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeNodeDelimiter = "\u00a0"
 
-"""""""""""" NERDCommenter """"""""""""
+""""""""""""""""""""""""""""""" NERDCommenter """"""""""""""""""""""""""""""""""
 
 let g:NERDSpaceDelims = 1
 
-"""""""""""""""" vim-go """"""""""""""""
+""""""""""""""""""""""""""""""""""" vim-go """""""""""""""""""""""""""""""""""""
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 0
@@ -147,13 +145,10 @@ let g:go_highlight_operators = 0
 let g:go_highlight_build_constraints = 1
 let g:go_addtags_transform = "camelcase"
 let g:go_fmt_command = "goimports"
-let g:go_def_mapping_enabled = 1
+let g:go_def_mapping_enabled = 0
 
 let g:go_term_enabled = 1
 let g:go_term_close_on_exit = 0
-
-
-""""""""""""""" ack.vim """"""""""""""""
 
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
@@ -167,12 +162,12 @@ if executable('rg')
   set grepformat=%f:%l:%c:%m
 endif
 
-""""""""""""""" undotree """""""""""""""
+"""""""""""""""""""""""""""""""""" undotree """"""""""""""""""""""""""""""""""""
 
 set undodir=$HOME/dotfiles/editor/.vimdid/
 set undofile                " So is persistent undo ...
 
-""""""""""""""""" fzf  """"""""""""""""""
+"""""""""""""""""""""""""""""""""""" FZF """""""""""""""""""""""""""""""""""""""
 
 map <C-p> :Files<CR>
 nmap <leader>; :Buffers<CR>
@@ -185,7 +180,7 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-"""""""""""""""" tagbar  """""""""""""""
+""""""""""""""""""""""""""""""""""" tagbar """""""""""""""""""""""""""""""""""""
 
 let g:tagbar_ctags_bin = '/usr/local/opt/ctags/bin/ctags'
 
@@ -217,7 +212,7 @@ let g:tagbar_type_go = {
 	\ 'ctagsargs' : '-sort -silent'
 \ }
 
-""""""""""""""""" ALE """"""""""""""""""
+"""""""""""""""""""""""""""""""""""" ALE """""""""""""""""""""""""""""""""""""""
 
 let g:ale_enable=0
 let g:ale_linters = {
@@ -225,7 +220,23 @@ let g:ale_linters = {
     \ 'python': ['flake8', 'pylint'],
 	\}
 
-"""""""""""""" Rust """""""""""""""""""
+"""""""""""""""""""""""""""""""""""" Rust """"""""""""""""""""""""""""""""""""""
 
 let g:rust_clip_command = 'pbcopy'
 let g:rustfmt_autosave = 1
+
+"""""""""""""""""""""""""""""""""" coc.vim """""""""""""""""""""""""""""""""""""
+
+set nobackup
+set nowritebackup
+
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
