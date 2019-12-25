@@ -53,7 +53,6 @@ cmap w!! w !sudo tee % >/dev/null
 cmap cwd lcd %:p:h
 cmap cd. lcd %:p:h
 
-noremap <leader>tn :setlocal invnumber<CR>
 noremap <leader>hl :nohl<CR>
 
 
@@ -92,7 +91,6 @@ set colorcolumn=81              " higlight column 81
 set list!
 set listchars=tab:·\ ,trail:.   " Highlight problematic whitespace
 set fillchars+=vert:\ 
-" set spell spelllang=en_us,ru
 set vb t_vb=                    " No more beeps
 set lazyredraw
 set nofoldenable
@@ -124,6 +122,7 @@ nnoremap <S-y> :NERDTreeToggle<CR>
 
 nnoremap <leader>gd :Gvdiff<CR>
 nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gw :Gw<CR>
 
 
 """""""""""""""""""""""""""""""""" NERDTree """"""""""""""""""""""""""""""""""""
@@ -163,6 +162,9 @@ if executable('rg')
 endif
 
 """""""""""""""""""""""""""""""""" undotree """"""""""""""""""""""""""""""""""""
+
+let g:undotree_WindowLayout = 3
+let g:undotree_ShortIndicators = 1
 
 set undodir=$HOME/dotfiles/editor/.vimdid/
 set undofile                " So is persistent undo ...
@@ -226,10 +228,6 @@ let g:rust_clip_command = 'pbcopy'
 let g:rustfmt_autosave = 1
 
 """""""""""""""""""""""""""""""""" coc.vim """""""""""""""""""""""""""""""""""""
-
-set nobackup
-set nowritebackup
-
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
