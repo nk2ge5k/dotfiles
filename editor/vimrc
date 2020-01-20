@@ -71,6 +71,10 @@ highlight clear SignColumn      " SignColumn should match background
 highlight clear LineNr          " Current line number row will have same
                                 " background color in relative mode
 
+" Highlight KILLME(note) note as vim highlights TODO(some) and NOTE
+au Syntax * syn match note /\v<(FIXME|TODO|KILLME|NOTE)(\(\w+\))?/ containedin=.*Comment,vimCommentTitle
+highlight def link note Todo
+
 set laststatus=2                " always display statusline
 set statusline=%<%n\ %F\ %m\ %r\ %y\ 0x%B,%b%=%l:%c\ %P
 
@@ -240,3 +244,4 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
