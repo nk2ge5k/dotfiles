@@ -1,3 +1,10 @@
+"
+"                        __   _(_)_ __ ___  _ __ ___ 
+"                        \ \ / / | '_ ` _ \| '__/ __|
+"                         \ V /| | | | | | | | | (__ 
+"                          \_/ |_|_| |_| |_|_|  \___|
+"
+"
 """"""""""""""""""""""""""""""""""" PLUGINS """"""""""""""""""""""""""""""""""""
 
 if filereadable(expand("~/.vimrc.plugins"))
@@ -38,12 +45,13 @@ set showcmd                 " Show partial commands in status line and
 
 set mouse=""                " disable mouse
 set noswapfile              " disable swap files
-set autochdir               " auto change current directory to file directory
+" set autochdir               " auto change current directory to file directory
 set hidden                  " Allow buffer switching without saving
 set history=1000
 set number
 set relativenumber
 set virtualedit=block
+set path+=**
 
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
@@ -55,27 +63,27 @@ cmap cd. lcd %:p:h
 
 noremap <leader>hl :nohl<CR>
 
+cnoreabbrev hs split %:p:h/<C-R>
+cnoreabbrev hv vsplit %:p:h/<C-R>
+cnoreabbrev he e %:p:h/<C-R>
+cnoreabbrev vt vertical terminal
 
 """""""""""""""""""""""""""""""""" APPERENCE """""""""""""""""""""""""""""""""""
 
 color base16-gruvbox-dark-hard
 let base16colorspace=256        " Access colors present in 256 colorspace
 
-set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
 
 set cursorline                  " Highlight current line
-
-highlight clear SignColumn      " SignColumn should match background
-highlight clear LineNr          " Current line number row will have same
-                                " background color in relative mode
 
 " Highlight KILLME(note) note as vim highlights TODO(some) and NOTE
 au Syntax * syn match note /\v<(FIXME|TODO|KILLME|NOTE)(\(\w+\))?/ containedin=.*Comment,vimCommentTitle
 highlight def link note Todo
 
 set laststatus=2                " always display statusline
-set statusline=%<%n\ %F\ %m\ %r\ %y\ 0x%B,%b%=%l:%c\ %P
+
+set statusline=%<%n\ %F\ %m\ %r\ %y\ %{fugitive#head()}\ %=%l:%c\ %P
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
@@ -120,15 +128,6 @@ nmap <C-l> <C-W>l
 nmap j gj
 nmap k gk
 
-nnoremap <S-y> :NERDTreeToggle<CR>
-
-"""""""""""""""""""""""""""""""""" Fugitive """"""""""""""""""""""""""""""""""""
-
-nnoremap <leader>gd :Gvdiff<CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gw :Gw<CR>
-
-
 """""""""""""""""""""""""""""""""" NERDTree """"""""""""""""""""""""""""""""""""
 
 let g:NERDTreeAutoDeleteBuffer = 1
@@ -146,9 +145,9 @@ let g:go_highlight_fields = 0
 let g:go_highlight_types = 0
 let g:go_highlight_operators = 0
 let g:go_highlight_build_constraints = 1
-let g:go_addtags_transform = "camelcase"
 let g:go_fmt_command = "goimports"
 let g:go_def_mapping_enabled = 0
+let g:go_code_completion_enabled = 0
 
 let g:go_term_enabled = 1
 let g:go_term_close_on_exit = 0
@@ -218,24 +217,12 @@ let g:tagbar_type_go = {
 	\ 'ctagsargs' : '-sort -silent'
 \ }
 
-"""""""""""""""""""""""""""""""""""" ALE """""""""""""""""""""""""""""""""""""""
-
-let g:ale_enable=0
-let g:ale_linters = {
-	\ 'go': ['gopls'],
-    \ 'python': ['flake8', 'pylint'],
-	\}
 
 """""""""""""""""""""""""""""""""""" Rust """"""""""""""""""""""""""""""""""""""
 
-let g:rust_clip_command = 'pbcopy'
 let g:rustfmt_autosave = 1
 
 """""""""""""""""""""""""""""""""" coc.vim """""""""""""""""""""""""""""""""""""
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -243,3 +230,51 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+"""""""""""""""""""""""""""""""""" vimwiki """""""""""""""""""""""""""""""""""""
+
+nmap <Leader>vfl :VimwikiFollowLink<CR>
+
+let g:vimwiki_global_ext = 0
+let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+let g:vimwiki_list = [{
+  \ 'path': '$HOME/Disk/wiki',
+  \ 'template_path': '$HOME/dotfiles/editor/wiki/templates',
+  \ 'template_default': 'default',
+  \ 'template_ext': '.tpl',
+  \ 'syntax': 'markdown',
+  \ 'auto_export': 0,
+  \ 'nested_syntaxes': {
+     \ 'go':'go',
+     \ 'json':'json',
+     \ 'php':'php',
+     \ 'c':'c'
+  \ },
+  \ }]
+
+
+""""""""""""""""""""""""""""" google/vim-codefmt """""""""""""""""""""""""""""""
+
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  " autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+  autocmd FileType rust AutoFormatBuffer rustfmt
+  autocmd FileType vue AutoFormatBuffer prettier
+augroup END

@@ -1,5 +1,5 @@
 call plug#begin()
-    Plug 'scrooloose/nerdtree'
+    " Plug 'scrooloose/nerdtree'
     Plug 'scrooloose/nerdcommenter'
     Plug 'bling/vim-bufferline'
     Plug 'terryma/vim-multiple-cursors'
@@ -9,18 +9,21 @@ call plug#begin()
     Plug 'vimwiki/vimwiki'
     Plug 'rust-lang/rust.vim'
     Plug 'tpope/vim-fugitive'
-    Plug 'easymotion/vim-easymotion'
     Plug 'godlygeek/tabular'
     Plug 'airblade/vim-rooter'
     Plug 'andymass/vim-matchup'
-
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+    Plug 'mbbill/undotree'
+    Plug 'ap/vim-css-color'
     " color
     Plug 'chriskempson/base16-vim'
 
-    " experiment
-    Plug 'kballard/vim-swift'
-    Plug 'mbbill/undotree'
+    Plug 'google/vim-maktaba'
+    Plug 'google/vim-codefmt'
+    " Also add Glaive, which is used to configure codefmt's maktaba flags. See
+    " `:help :Glaive` for usage.
+    Plug 'google/vim-glaive'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
+    Plug 'wakatime/vim-wakatime'
 call plug#end()
